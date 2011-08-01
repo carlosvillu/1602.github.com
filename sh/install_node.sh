@@ -1,11 +1,11 @@
 #!/bin/bash
-NODE_VERSION=0.3.1
+NODE_VERSION=0.4.9
 NODE_FILE=node-v$NODE_VERSION
-MY_USER=anatoliy
-REDIS_VERSION=2.0.3
+MY_USER=nodester
+REDIS_VERSION=2.2.12
 
 apt-get update
-apt-get install -y build-essential git-core nginx libssl-dev pkg-config
+apt-get install -y build-essential git-core nginx libssl-dev pkg-config curl
 
 wget http://nodejs.org/dist/$NODE_FILE.tar.gz
 tar -zxvf $NODE_FILE.tar.gz
@@ -42,7 +42,7 @@ adduser --system --shell /bin/bash --group --disabled-password --home /home/$MY_
 
 # install redis
 wget http://redis.googlecode.com/files/redis-$REDIS_VERSION.tar.gz
-tar xzvf redis-$REDIS_VERSION.tar.gz 
+tar xzvf redis-$REDIS_VERSION.tar.gz
 cd redis-$REDIS_VERSION
 make
 sudo make install
@@ -67,14 +67,7 @@ mkdir -p /var/log/redis
 start redis
 
 # install npm
-sudo chown -R $MY_USER /usr/local/{share/man,bin,lib/node}
-cd
-git clone http://github.com/isaacs/npm.git
-cd npm/
-make
-make install
-cd
-rm -rf npm
+sudo -u $MY_USER sh -c "curl http://npmjs.org/install.sh | sh"
 
 # install npm packages
 sudo -u $MY_USER sh -c "cd /home/$MY_USER && npm install redis express connect-redis socket.io jade"
