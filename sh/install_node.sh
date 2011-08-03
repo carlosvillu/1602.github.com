@@ -15,6 +15,9 @@ make
 make install
 cd
 
+echo 'export PATH=$HOME/local/node/bin:$PATH' >> ~/.profile
+echo 'export NODE_PATH=$HOME/local/node:$HOME/local/node/lib/node_modules' >> ~/.profile
+
 # Setup basic nginx proxy.
 cat > /etc/nginx/sites-available/node_proxy.conf <<EOF
 server {
@@ -37,6 +40,9 @@ git checkout v$NPM_VERSION
 make
 make install
 cd
+
+echo 'export PATH=$HOME/local/npm/bin:$PATH' >> ~/.profile
+source ~/.profile
 
 # install npm packages
 npm install -g express socket.io jade coffee-script vows
