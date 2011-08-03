@@ -1,6 +1,5 @@
 #!/bin/bash
 NODE_VERSION=0.4.10
-NODE_FILE=node-v$NODE_VERSION
 NPM_VERSION=1.0.22
 
 apt-get update
