@@ -2,8 +2,8 @@
 NODE_VERSION=0.4.10
 NPM_VERSION=1.0.22
 
-apt-get update
-apt-get install -y build-essential git-core nginx libssl-dev pkg-config curl
+sudo apt-get update
+sudo apt-get install -y build-essential git-core nginx libssl-dev pkg-config curl
 
 # Install node
 mkdir -p $HOME/local/node
@@ -17,6 +17,7 @@ cd
 
 echo 'export PATH=$HOME/local/node/bin:$PATH' >> ~/.profile
 echo 'export NODE_PATH=$HOME/local/node:$HOME/local/node/lib/node_modules' >> ~/.profile
+source $HOME/.profile
 
 # Setup basic nginx proxy.
 cat > /etc/nginx/sites-available/node_proxy.conf <<EOF
